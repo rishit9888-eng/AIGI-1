@@ -27,5 +27,5 @@ jobs:
       # Deploy to GitHub Pages
       - uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}  # Use your custom secret here
+          github_token: ${{ secrets.GH_PAGES_PAT }}  # Use your custom secret here
           publish_dir: ./dist/public
