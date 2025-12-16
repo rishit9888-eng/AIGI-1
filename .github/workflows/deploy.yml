@@ -12,22 +12,29 @@ jobs:
 
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       # Setup Node.js
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       # Install dependencies
-      - run: npm ci
+      - name: Install dependencies
+        run: npm install
 
       # Build the project
-      - run: npm run build
+      - name: Build project
+        run: npm run build
 
       # Deploy to GitHub Pages using Personal Access Token
-      - uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GH_PAGES_PAT }}   # <-- Use your PAT secret here
+          personal_token: ${{ secrets.GH_PAGES_PAT }}   # Use your PAT secret
           publish_dir: ./dist/public
           commit_message: "ci: deploy to GitHub Pages"
+          # Optional: keep Git history on gh-pages branch
+          keep_files: false
