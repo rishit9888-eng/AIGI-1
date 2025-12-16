@@ -17,7 +17,7 @@ import StaffDashboardPage from "@/pages/staff-dashboard";
 
 function Router() {
   return (
-    <Switch>
+    <Switch base="/AIGI-1">
       <Route path="/" component={Home} />
       <Route path="/verify" component={Verify} />
       <Route path="/about" component={About} />

@@ -3,6 +3,7 @@ import pkg from "pg";
 const { Pool } = pkg;
 
 import * as schema from "@shared/schema";
+import { certificates, users, branches, announcements, galleryItems, contactSubmissions, seminars } from "@shared/schema";
 
 let db: any = null;
 

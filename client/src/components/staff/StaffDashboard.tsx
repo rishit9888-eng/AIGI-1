@@ -138,7 +138,7 @@ export default function StaffDashboard({ username = "Admin", user, onLogout, onU
   const updateCertMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }) => {
       const form = new FormData();
-      Object.entries(data).forEach(([k, v]) => { if (v) form.append(k, v); });
+      Object.entries(data).forEach(([k, v]) => { if (v && typeof v === 'string') form.append(k, v); });
       await apiRequest("PATCH", `/api/certificates/${id}`, form);
     },
     onSuccess: () => {

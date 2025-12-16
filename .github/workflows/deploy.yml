@@ -5,36 +5,29 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
+      - run: npm ci
+      - run: npm run build
 
-      # Build the project
-      - name: Build project
-        run: npm run build
+      - uses: actions/configure-pages@v5
 
-      # Deploy to GitHub Pages using Personal Access Token
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          personal_token: ${{ secrets.GH_PAGES_PAT }}   # Use your PAT secret
-          publish_dir: ./dist/public
-          commit_message: "ci: deploy to GitHub Pages"
-          # Optional: keep Git history on gh-pages branch
-          keep_files: false
+          path: dist/public
+
+      - uses: actions/deploy-pages@v4

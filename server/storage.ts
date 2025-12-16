@@ -289,7 +289,6 @@ export class MockStorage implements IStorage {
       color: "E",
       clarity: "VS1",
       cut: "Excellent",
-      branch: "Head Office",
       notes: "Sample certificate for demonstration",
       filePath: null,
       issuedDate: new Date(),
@@ -545,6 +544,33 @@ export class MockStorage implements IStorage {
 
   async deleteSeminar(id: string): Promise<void> {
     this.mockSeminars = this.mockSeminars.filter((s) => s.id !== id);
+  }
+
+  // Missing methods for IStorage interface
+  async getAllUsers(): Promise<User[]> {
+    return this.mockUsers;
+  }
+
+  async updateUser(id: string, user: Partial<InsertUser>): Promise<User | undefined> {
+    const idx = this.mockUsers.findIndex((u) => u.id === id);
+    if (idx === -1) return undefined;
+    this.mockUsers[idx] = { ...this.mockUsers[idx], ...user };
+    return this.mockUsers[idx];
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    this.mockUsers = this.mockUsers.filter((u) => u.id !== id);
+  }
+
+  async updateCertificate(id: string, certificate: Partial<InsertCertificate>): Promise<Certificate | undefined> {
+    const idx = this.mockCertificates.findIndex((c) => c.id === id);
+    if (idx === -1) return undefined;
+    this.mockCertificates[idx] = { ...this.mockCertificates[idx], ...certificate };
+    return this.mockCertificates[idx];
+  }
+
+  async clearAllCertificates(): Promise<void> {
+    this.mockCertificates = [];
   }
 }
 

@@ -319,10 +319,10 @@ export default function CertificateUpload({ onClose }: { onClose?: () => void })
       certificateNumber: "",
       stoneType: "",
       carat: "",
+      grossWeight: "",
       color: "",
       clarity: "",
       cut: "",
-      branch: "",
       notes: "",
     });
   };
