@@ -7,6 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +25,9 @@ jobs:
       # Build the project
       - run: npm run build
 
-      # Deploy to GitHub Pages
+      # Deploy to GitHub Pages using Personal Access Token
       - uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAGES_PAT }}  # Use your custom secret here
+          personal_token: ${{ secrets.GH_PAGES_PAT }}   # <-- Use your PAT secret here
           publish_dir: ./dist/public
+          commit_message: "ci: deploy to GitHub Pages"
