@@ -7,13 +7,15 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: "/AIGI-1/", // 🔴 REQUIRED for GitHub Pages
+  // ✅ GitHub Pages base (repo name)
+  base: process.env.NODE_ENV === "production" ? "/AIGI-1/" : "/",
 
   plugins: [
     react(),
     runtimeErrorOverlay(),
   ],
 
+  // Your client root
   root: path.resolve(__dirname, "client"),
 
   resolve: {
