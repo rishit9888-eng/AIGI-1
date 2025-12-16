@@ -1,14 +1,14 @@
 import { MapPin, Phone, Mail } from "lucide-react";
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 
 const quickLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Verify Certificate", href: "/verify" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Research", href: "/research" },
-  { label: "Education", href: "/education" },
-  { label: "Contact", href: "/contact" },
+  { label: "About Us", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Verify Certificate", to: "/verify" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Research", to: "/research" },
+  { label: "Education", to: "/education" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const branches = [
@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <img src="/logo.png" alt="AIGI" className="h-8 w-8" />
               <span className="font-serif text-xl font-semibold">AIGI</span>
             </Link>
@@ -39,8 +39,8 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <li key={link.to}>
+                  <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -85,10 +85,10 @@ export default function Footer() {
             2024 AIGI - All India Gemological Institute. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+            <Link to="/privacy" className="hover:text-foreground transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
+            <Link to="/terms" className="hover:text-foreground transition-colors">
               Terms of Service
             </Link>
           </div>

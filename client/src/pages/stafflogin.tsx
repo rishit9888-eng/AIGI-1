@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getQueryFn } from "@/lib/queryClient";
 import StaffLogin from "@/components/staff/StaffLogin";
@@ -13,7 +13,7 @@ interface User {
 }
 
 export default function StaffLoginPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   
   const { data: user, isLoading } = useQuery<User | null>({
     queryKey: ["/api/auth/user"],
@@ -23,7 +23,7 @@ export default function StaffLoginPage() {
   const handleLogin = () => {
     // Refetch user data to ensure we have the latest auth state
     setTimeout(() => {
-      setLocation("/staff/dashboard");
+      navigate("/staff/dashboard");
     }, 100);
   };
 
@@ -36,7 +36,7 @@ export default function StaffLoginPage() {
   }
 
   if (user) {
-    setLocation("/staff/dashboard");
+    navigate("/staff/dashboard");
     return null;
   }
 

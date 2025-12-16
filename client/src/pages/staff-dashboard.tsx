@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getQueryFn, apiRequest } from "@/lib/queryClient";
 import StaffDashboard from "@/components/staff/StaffDashboard";
@@ -15,7 +15,7 @@ interface User {
 }
 
 export default function StaffDashboardPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showUpload, setShowUpload] = useState(false);
 
@@ -37,7 +37,7 @@ export default function StaffDashboardPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });
-      setLocation("/");
+      navigate("/");
     },
   });
 
@@ -68,7 +68,7 @@ export default function StaffDashboardPage() {
         <StaffDashboard 
           username={displayUser.fullName || displayUser.username}           user={user}          onLogout={handleLogout}
           onUploadCertificate={() => setShowUpload(true)}
-          onViewPublic={() => setLocation('/')}
+          onViewPublic={() => navigate('/')}
           stats={[
             { label: 'Certificates Issued', value: (certificates?.length ?? 0).toString(), change: '' },
             { label: 'Pending Verifications', value: '—', change: '' },

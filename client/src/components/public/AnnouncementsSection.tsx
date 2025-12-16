@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Calendar, FileText, Loader2 } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import type { Announcement } from "@shared/schema";
 
@@ -66,7 +66,7 @@ export default function AnnouncementsSection() {
               Research publications, announcements, and industry news
             </p>
           </div>
-          <Link href="/research">
+          <Link to="/research">
             <Button variant="outline" data-testid="button-view-all-updates">
               View All
               <ArrowRight className="h-4 w-4 ml-2" />

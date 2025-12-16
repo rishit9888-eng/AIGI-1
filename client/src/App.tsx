@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -15,31 +15,27 @@ import Contact from "@/pages/contact";
 import StaffLoginPage from "@/pages/stafflogin";
 import StaffDashboardPage from "@/pages/staff-dashboard";
 
-function Router() {
-  return (
-    <Switch base="/AIGI-1">
-      <Route path="/" component={Home} />
-      <Route path="/verify" component={Verify} />
-      <Route path="/about" component={About} />
-      <Route path="/services" component={Services} />
-      <Route path="/gallery" component={Gallery} />
-      <Route path="/research" component={Research} />
-      <Route path="/education" component={Education} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/stafflogin" component={StaffLoginPage} />
-      <Route path="/staff/dashboard" component={StaffDashboardPage} />
-      <Route path="/staff-dashboard" component={StaffDashboardPage} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <BrowserRouter basename="/AIGI-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/stafflogin" element={<StaffLoginPage />} />
+            <Route path="/staff/dashboard" element={<StaffDashboardPage />} />
+            <Route path="/staff-dashboard" element={<StaffDashboardPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

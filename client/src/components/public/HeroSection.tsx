@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight } from "lucide-react";
 import heroImage from "@assets/generated_images/diamond_laboratory_microscope_examination.png";
@@ -24,13 +24,13 @@ export default function HeroSection() {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/verify">
+          <Link to="/verify">
             <Button size="lg" className="min-w-[200px]" data-testid="button-hero-verify">
               <Shield className="h-5 w-5 mr-2" />
               Verify Certificate
             </Button>
           </Link>
-          <Link href="/about">
+          <Link to="/about">
             <Button
               size="lg"
               variant="outline"

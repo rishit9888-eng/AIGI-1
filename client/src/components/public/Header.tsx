@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield } from "lucide-react";
 
 const navItems = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Research", href: "/research" },
-  { label: "Education", href: "/education" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Research", to: "/research" },
+  { label: "Education", to: "/education" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,18 +36,18 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
+          <Link to="/" className="flex items-center gap-2" data-testid="link-logo">
             <img src="/logo.png" alt="AIGI" className="h-8 w-8" />
             <span className="font-serif text-xl font-semibold tracking-tight">AIGI</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1" data-testid="nav-desktop">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.to} to={item.to}>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={location === item.href ? "bg-accent" : ""}
+                  className={location.pathname === item.to ? "bg-accent" : ""}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}
@@ -57,7 +57,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/verify">
+            <Link to="/verify">
               <Button data-testid="button-verify-certificate">
                 <Shield className="h-4 w-4 mr-2" />
                 Verify Certificate
@@ -81,7 +81,7 @@ export default function Header() {
         <div className="lg:hidden bg-background border-b border-border" data-testid="nav-mobile">
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.to} to={item.to}>
                 <Button
                   variant="ghost"
                   className="w-full justify-start"
@@ -93,7 +93,7 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4 space-y-2 border-t border-border">
-              <Link href="/verify">
+              <Link to="/verify">
                 <Button className="w-full" onClick={() => setMobileMenuOpen(false)}>
                   <Shield className="h-4 w-4 mr-2" />
                   Verify Certificate
